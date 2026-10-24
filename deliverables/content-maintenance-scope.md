@@ -13,14 +13,16 @@ Default locale: `en`
 
 ## Fixed public-page content
 
-- Home: three Banner states (desktop/mobile media, eyebrow, title, supporting copy, primary/secondary CTA), equipment-family introduction, engineering/manufacturing section, application cards, five-step process, buyer FAQ, quality-evidence section, RFQ band, navigation, footer, and page SEO.
-- Products: list hero, family descriptions, product-card mapping, list SEO; product detail content remains backed by the product collection.
-- Applications: hero and real application-industry sections.
-- Capabilities: hero, engineering/manufacturing/inspection sections.
-- About: hero, legal company identity, Changzhou facility copy and real facility media.
-- News: list hero and empty state; article detail remains backed by the article collection.
-- Contact: hero, public contact facts, address, form labels/help text, and page SEO.
-- Shared shell: header Logo/navigation/CTA, footer Logo/legal owner/contact/product links, Organization/WebSite Schema identity, favicon, default Open Graph image.
+- Home: page SEO is managed through Site Content v2. The three Banner states and the remaining home-page sections keep the approved code-backed presentation and are not represented as backend-editable fields.
+- Products: the list-page Hero eyebrow, title, and description are managed through Site Content v2. Family descriptions and product cards are driven by the product/category collections; product detail content remains backed by the product collection.
+- Applications: the Hero eyebrow, title, and description are managed through Site Content v2. Application cards remain code-backed.
+- Capabilities: the Hero eyebrow, title, and description are managed through Site Content v2. Engineering/manufacturing/inspection cards remain code-backed.
+- About: the Hero eyebrow, title, and description are managed through Site Content v2. Legal identity, facility copy, and facility media remain code-backed.
+- News: the list Hero eyebrow, title, and description are managed through Site Content v2. The list, empty state, and article details remain backed by the article collection and existing presentation code.
+- Contact: the Hero eyebrow, title, and description are managed through Site Content v2. Contact facts, address, form labels, and help text remain code-backed.
+- Shared shell: header, footer, Organization/WebSite Schema identity, favicon, and default Open Graph presentation remain code-backed and read tenant settings where already integrated.
+
+Published Site Content v2 is intentionally limited to modules that the customer site actually consumes. It declares `home.seo` plus the six list/static-page Hero modules above; it does not claim free-form page building, navigation editing, redirects, product SEO, or article ordering.
 
 ## Media inventory
 
