@@ -8,7 +8,7 @@ import { Reveal } from '@/components/site/reveal'
 import { SectionHeading } from '@/components/site/section-heading'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { industries } from '@/lib/content'
-import { getProductViews } from '@/lib/products'
+import { fetchProductsData } from '@/lib/products-db'
 import { buildMetadata } from '@/lib/seo'
 import { siteContentMetadata } from '@/lib/site-content/site-content'
 
@@ -34,8 +34,8 @@ const faqs = [
   ['What information helps equipment selection?', 'Send the material or medium, batch size or vessel dimensions, viscosity, temperature, pressure where applicable, quantity and any drawings or site constraints.'],
 ]
 
-export default function HomePage() {
-  const products = getProductViews()
+export default async function HomePage() {
+  const products = await fetchProductsData()
   return <>
     <HeroCarousel />
     <section className="section-pad bg-background"><div className="mx-auto max-w-7xl px-5 sm:px-8">

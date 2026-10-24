@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { getProductView, getProductViews } from '../lib/products'
 import { absoluteUrl, productJsonLd } from '../lib/seo'
+import { readFileSync } from 'node:fs'
 
 const expectedSlugs = [
   'top-entry-agitator',
@@ -18,6 +19,20 @@ const expectedSlugs = [
 ]
 
 describe('customer catalog contract', () => {
+  it('renders homepage product cards from the backend data layer', () => {
+    const source = readFileSync(new URL('../app/page.tsx', import.meta.url), 'utf8')
+    expect(source).toContain("import { fetchProductsData } from '@/lib/products-db'")
+    expect(source).toContain('await fetchProductsData()')
+    expect(source).not.toContain("import { getProductViews } from '@/lib/products'")
+  })
+
+  it('renders product-family headings from the backend category data layer', () => {
+    const source = readFileSync(new URL('../app/products/page.tsx', import.meta.url), 'utf8')
+    expect(source).toContain('fetchProductFamilies')
+    expect(source).toContain('await Promise.all([fetchProductsData(), fetchProductFamilies()])')
+    expect(source).not.toContain("import { getFamilyViews } from '@/lib/products'")
+  })
+
   it('keeps every one of the 12 customer products independently reachable', () => {
     expect(getProductViews().map((product) => product.slug)).toEqual(expectedSlugs)
     for (const slug of expectedSlugs) expect(getProductView(slug)?.slug).toBe(slug)
