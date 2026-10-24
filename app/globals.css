@@ -1,0 +1,172 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --navy: #0a1f4d;
+  --navy-soft: #123a9a;
+  --cyan: #0ea9e6;
+  --steel: #eef3f9;
+  --steel-deep: #dce6f2;
+
+  --background: #ffffff;
+  --foreground: #0b1b3a;
+  --card: #ffffff;
+  --card-foreground: #0b1b3a;
+  --popover: #ffffff;
+  --popover-foreground: #0b1b3a;
+  --primary: #123a9a;
+  --primary-foreground: #ffffff;
+  --secondary: #eef3f9;
+  --secondary-foreground: #0a1f4d;
+  --muted: #eef3f9;
+  --muted-foreground: #4a5b78;
+  --accent: #e4ecf7;
+  --accent-foreground: #0a1f4d;
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+  --border: #d3deec;
+  --input: #bccbe0;
+  --ring: #123a9a;
+  --cta: #f7a81b;
+  --cta-hover: #ffbc42;
+  --cta-foreground: #0a1f4d;
+  --radius: 0.375rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-plex-sans), 'Helvetica Neue', Arial, sans-serif;
+  --font-display: var(--font-plex-condensed), 'Arial Narrow', Arial, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-navy: var(--navy);
+  --color-navy-soft: var(--navy-soft);
+  --color-cyan: var(--cyan);
+  --color-steel: var(--steel);
+  --color-steel-deep: var(--steel-deep);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-cta-foreground: var(--cta-foreground);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+  :focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(18 58 154 / 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(18 58 154 / 0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .grid-lines-dark {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em];
+  }
+}
+
+/* Once-only viewport reveal. Content is visible by default; "hidden" is only applied after
+   the client confirms an IntersectionObserver is watching the element. */
+.reveal {
+  transition:
+    opacity 650ms cubic-bezier(0.22, 0.8, 0.3, 1),
+    transform 650ms cubic-bezier(0.22, 0.8, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal[data-reveal='hidden'] {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+}
+
+.flow-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1600ms cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+[data-reveal='shown'] .flow-path,
+[data-reveal='visible'] .flow-path,
+[data-reveal='fallback'] .flow-path {
+  stroke-dashoffset: 0;
+}
+.flow-rail {
+  transform-origin: top;
+  transition: transform 1400ms cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+[data-reveal='hidden'] .flow-rail {
+  transform: scaleY(0);
+}
+
+@keyframes hero-push {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .flow-path,
+  .flow-rail {
+    transition: none;
+  }
+  .reveal[data-reveal='hidden'] {
+    opacity: 1;
+    transform: none;
+  }
+  .flow-path {
+    stroke-dashoffset: 0;
+  }
+  [data-reveal='hidden'] .flow-rail {
+    transform: none;
+  }
+}
