@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "key": "home",
+      "path": "/",
+      "label": "Home",
+      "modules": [
+        {
+          "key": "seo",
+          "type": "seo",
+          "label": "Home SEO",
+          "canHide": false,
+          "canReorder": false,
+          "fields": [
+            { "key": "title", "type": "text", "label": "Title", "localized": true, "required": true, "maxLength": 70 },
+            { "key": "description", "type": "textarea", "label": "Description", "localized": true, "required": true, "maxLength": 180 }
+          ]
+        }
+      ]
+    }
+  ]
+}

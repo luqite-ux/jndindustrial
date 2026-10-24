@@ -1,0 +1,16 @@
+{
+  "pages": {
+    "home": {
+      "order": ["seo"],
+      "modules": {
+        "seo": {
+          "hidden": false,
+          "values": {
+            "title": { "en": "JND Industrial | Mixing and Process Equipment" },
+            "description": { "en": "Industrial agitators, mixers, reactors, tanks and heat exchangers engineered around material, batch volume and operating conditions." }
+          }
+        }
+      }
+    }
+  }
+}

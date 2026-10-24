@@ -1,0 +1,6 @@
+{
+  "domain": "jndindustrial.com",
+  "adapterVersion": "1",
+  "capabilities": ["preview"],
+  "modules": ["home.seo"]
+}

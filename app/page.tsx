@@ -9,6 +9,14 @@ import { SectionHeading } from '@/components/site/section-heading'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { industries } from '@/lib/content'
 import { getProductViews } from '@/lib/products'
+import { buildMetadata } from '@/lib/seo'
+import { siteContentMetadata } from '@/lib/site-content/site-content'
+
+export async function generateMetadata() {
+  const base = buildMetadata({ title: 'JND Industrial', description: 'Industrial mixing and process equipment engineered around material, batch volume and operating conditions.', path: '/' })
+  const managed = await siteContentMetadata('/', 'en')
+  return { ...base, ...managed }
+}
 
 const process = [
   ['01', 'Process inputs', 'Share material, batch volume, viscosity and operating conditions.'],
