@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { getProductView, getProductViews } from '../lib/products'
 import { absoluteUrl, productJsonLd } from '../lib/seo'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 
 const expectedSlugs = [
   'top-entry-agitator',
@@ -19,6 +19,19 @@ const expectedSlugs = [
 ]
 
 describe('customer catalog contract', () => {
+  it('renders every static public-page hero from the published site-content snapshot', () => {
+    const adapterUrl = new URL('../components/site/managed-page-hero.tsx', import.meta.url)
+    expect(existsSync(adapterUrl), 'managed PageHero adapter must exist').toBe(true)
+    const adapter = existsSync(adapterUrl) ? readFileSync(adapterUrl, 'utf8') : ''
+    expect(adapter).toContain('getSiteContent')
+    expect(adapter).toContain('data-hq-content-version')
+    for (const route of ['products', 'applications', 'capabilities', 'about', 'news', 'contact']) {
+      const source = readFileSync(new URL(`../app/${route}/page.tsx`, import.meta.url), 'utf8')
+      expect(source, route).toContain('ManagedPageHero')
+      expect(source, route).not.toContain('<PageHero ')
+    }
+  })
+
   it('renders homepage product cards from the backend data layer', () => {
     const source = readFileSync(new URL('../app/page.tsx', import.meta.url), 'utf8')
     expect(source).toContain("import { fetchProductsData } from '@/lib/products-db'")
