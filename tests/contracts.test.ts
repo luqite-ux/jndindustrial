@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { getProductView, getProductViews } from '../lib/products'
+import { absoluteUrl, productJsonLd } from '../lib/seo'
 
 const expectedSlugs = [
   'top-entry-agitator',
@@ -42,6 +43,14 @@ describe('customer catalog contract', () => {
   it('does not expose prohibited warranty or guarantee claims in catalog content', () => {
     const rendered = JSON.stringify(getProductViews()).toLowerCase()
     expect(rendered).not.toMatch(/warrant(?:y|ies)|guarantee(?:d)?|质保|保修/)
+  })
+})
+
+describe('SEO URL contract', () => {
+  it('keeps public absolute media URLs unchanged in product schema', () => {
+    const product = { ...getProductViews()[0], image: 'https://pub.example-r2.dev/products/mixer.jpg' }
+    expect(absoluteUrl(product.image)).toBe(product.image)
+    expect(productJsonLd(product).image).toBe(product.image)
   })
 })
 

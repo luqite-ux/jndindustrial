@@ -4,7 +4,10 @@ import { defaultLocale, localizePath, type Locale } from './i18n'
 import type { NewsPostView } from './news'
 import type { ProductView } from './products'
 
-export const absoluteUrl = (path: string) => `${siteConfig.url}${path}`
+export const absoluteUrl = (path: string) => {
+  if (/^https?:\/\//i.test(path)) return path
+  return `${siteConfig.url}${path.startsWith('/') ? path : `/${path}`}`
+}
 
 interface MetadataInput {
   title: string
