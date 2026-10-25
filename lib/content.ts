@@ -145,7 +145,7 @@ export const faqs = [
   {
     question: 'Can I get a sample?',
     answer:
-      'Sample arrangements depend on the equipment type and your project. Describe what you need in the inquiry form and an engineer will reply with what can be arranged.',
+      'These are non-standard industrial machines and vessels, so physical samples are generally not available. Send your process requirements or drawings and an engineer will review the appropriate configuration.',
   },
   {
     question: 'Which documents can I receive?',

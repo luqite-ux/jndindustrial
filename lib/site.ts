@@ -20,7 +20,7 @@ export const siteConfig = {
     height: 705,
     alt: 'JND Jianengde logo',
   },
-  defaultOgImage: '/images/hero/banner-1.jpg',
+  defaultOgImage: '/images/hero/banner-1.webp',
 } as const
 
 export const navItems = [

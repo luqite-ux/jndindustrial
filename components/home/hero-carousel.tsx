@@ -20,7 +20,7 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: '/images/hero/banner-1.jpg',
+    image: '/images/hero/banner-1.webp',
     alt: 'Illustrated process plant with stainless steel reactors, agitator drives, motors and a technical control display on a pale blue stage',
     kicker: 'Industrial mixing and process equipment',
     body: 'Agitators, mixers, reactors, tanks and heat exchangers, specified from your material, batch volume and operating conditions.',
@@ -31,7 +31,7 @@ const slides: Slide[] = [
     zoomOrigin: '72% 62%',
   },
   {
-    image: '/images/hero/banner-2.jpg',
+    image: '/images/hero/banner-2.webp',
     alt: 'Industrial factory complex with a process tower, horizontal vessel and silos beside a glowing curved road on a deep blue background',
     kicker: 'Built in Changzhou, Jiangsu',
     body: 'Non-standard vessels, silos and process equipment fabricated against your drawings, with production progress feedback.',
@@ -42,7 +42,7 @@ const slides: Slide[] = [
     zoomOrigin: '25% 60%',
   },
   {
-    image: '/images/hero/banner-3.jpg',
+    image: '/images/hero/banner-3.webp',
     alt: 'Wireframe engineering view of reactors and mixer drums inside a factory hall, circled by glowing flow lines',
     kicker: 'Non-standard customization and OEM/ODM',
     body: 'Send drawings or a process description and engineers will propose a configuration. MOQ is 1 unit.',
@@ -183,7 +183,10 @@ export function HeroCarousel() {
         >
           <div
             key={active}
-            className="pointer-events-auto max-w-xl animate-in fade-in-0 slide-in-from-bottom-3 duration-500 motion-reduce:animate-none md:max-w-[34rem]"
+            className={cn(
+              'pointer-events-auto min-w-0 max-w-[calc(100vw-2.5rem)] animate-in fade-in-0 slide-in-from-bottom-3 duration-500 motion-reduce:animate-none sm:max-w-xl md:max-w-[min(32rem,42vw)]',
+              current.textSide === 'right' && 'md:mr-6 lg:mr-10',
+            )}
           >
             <p
               className={cn(
@@ -195,7 +198,7 @@ export function HeroCarousel() {
             </p>
             <h1
               className={cn(
-                'text-balance text-[2.5rem] font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl',
+                'break-words text-balance text-[2.25rem] font-semibold leading-[1.02] text-white sm:text-5xl lg:text-6xl xl:text-[4rem]',
                 current.desktopTone === 'light' && 'md:text-navy',
               )}
             >
@@ -209,7 +212,7 @@ export function HeroCarousel() {
             >
               {current.body}
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-7 grid max-w-full grid-cols-1 gap-3 sm:flex sm:flex-wrap">
               <ActionLink href="/products">Explore Equipment</ActionLink>
               <ActionLink
                 href="/contact"
@@ -263,7 +266,7 @@ export function HeroCarousel() {
                 onClick={() => go(index)}
                 aria-label={`Show slide ${index + 1}`}
                 aria-current={index === active}
-                className="grid h-11 w-8 place-items-center"
+                className="grid size-11 place-items-center"
               >
                 <span
                   className={cn(

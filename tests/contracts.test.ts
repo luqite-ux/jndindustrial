@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { getProductView, getProductViews } from '../lib/products'
 import { absoluteUrl, productJsonLd } from '../lib/seo'
 import { existsSync, readFileSync } from 'node:fs'
+import { statSync } from 'node:fs'
 
 const expectedSlugs = [
   'top-entry-agitator',
@@ -19,6 +20,39 @@ const expectedSlugs = [
 ]
 
 describe('customer catalog contract', () => {
+  it('keeps carousel copy inside responsive safe areas and gives every selector a 44px target', () => {
+    const source = readFileSync(new URL('../components/home/hero-carousel.tsx', import.meta.url), 'utf8')
+    expect(source).toContain('md:max-w-[min(32rem,42vw)]')
+    expect(source).toContain('max-w-[calc(100vw-2.5rem)]')
+    expect(source).toContain("current.textSide === 'right' && 'md:mr-6 lg:mr-10'")
+    expect(source).toContain('className="grid size-11 place-items-center"')
+  })
+
+  it('serves optimized hero artwork instead of multi-megabyte source files', () => {
+    for (const name of ['banner-1.webp', 'banner-2.webp', 'banner-3.webp']) {
+      const asset = new URL(`../public/images/hero/${name}`, import.meta.url)
+      expect(existsSync(asset), `${name} must exist`).toBe(true)
+      if (existsSync(asset)) expect(statSync(asset).size, name).toBeLessThan(1_000_000)
+    }
+    const source = readFileSync(new URL('../components/home/hero-carousel.tsx', import.meta.url), 'utf8')
+    expect(source).not.toMatch(/banner-[123]\.jpg/)
+  })
+
+  it('presents supplied company facts without an internal provenance disclaimer', () => {
+    const source = readFileSync(new URL('../app/about/page.tsx', import.meta.url), 'utf8')
+    expect(source).toContain('35,000 m²')
+    expect(source).toContain('two workshops')
+    expect(source).toContain('Wuxi')
+    expect(source).not.toContain('customer-provided facts')
+    expect(source).not.toContain('third-party verification')
+  })
+
+  it('states the supplied no-sample policy consistently in fallback content', () => {
+    const source = readFileSync(new URL('../lib/content.ts', import.meta.url), 'utf8')
+    expect(source).toContain('physical samples are generally not available')
+    expect(source).not.toContain('Sample arrangements depend on the equipment type')
+  })
+
   it('publishes the customer-supplied conditional production lead time', () => {
     const source = readFileSync(new URL('../app/page.tsx', import.meta.url), 'utf8')
     expect(source).toContain('45–90 days')
