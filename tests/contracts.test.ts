@@ -19,6 +19,12 @@ const expectedSlugs = [
 ]
 
 describe('customer catalog contract', () => {
+  it('publishes the customer-supplied conditional production lead time', () => {
+    const source = readFileSync(new URL('../app/page.tsx', import.meta.url), 'utf8')
+    expect(source).toContain('45–90 days')
+    expect(source).toContain('confirmed for each order')
+  })
+
   it('renders every static public-page hero from the published site-content snapshot', () => {
     const adapterUrl = new URL('../components/site/managed-page-hero.tsx', import.meta.url)
     expect(existsSync(adapterUrl), 'managed PageHero adapter must exist').toBe(true)

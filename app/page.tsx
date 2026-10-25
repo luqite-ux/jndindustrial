@@ -29,6 +29,7 @@ const process = [
 const faqs = [
   ['Can JND customize equipment?', 'Yes. Size, material, process configuration and interfaces can be reviewed against your process and drawings.'],
   ['What is the minimum order quantity?', 'The customer-stated MOQ is one unit. Final scope and commercial terms are confirmed per quotation.'],
+  ['What is the typical production lead time?', 'Customer information gives a typical production range of 45–90 days. The applicable schedule is confirmed for each order after the equipment scope and operating conditions are reviewed.'],
   ['Can you provide samples?', 'These are non-standard industrial machines and vessels, so physical samples are generally not available. Technical data and inspection documentation can be discussed instead.'],
   ['Which industries do you serve?', 'Confirmed applications include petrochemical, fine chemical, biological fermentation, lithium battery materials, food and pharmaceutical processing.'],
   ['What information helps equipment selection?', 'Send the material or medium, batch size or vessel dimensions, viscosity, temperature, pressure where applicable, quantity and any drawings or site constraints.'],
