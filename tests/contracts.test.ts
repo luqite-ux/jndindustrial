@@ -160,6 +160,13 @@ describe('customer catalog contract', () => {
     }
   })
 
+  it('renders every application role instead of truncating customer description facts', () => {
+    const source = readFileSync(new URL('../app/products/[slug]/page.tsx', import.meta.url), 'utf8')
+    expect(source).toContain("['Applications and process duties',product.applicationRoles]")
+    expect(source).toContain("['Inputs to share',product.selectionInputs]")
+    expect(source).not.toContain('product.applicationRoles.slice(')
+  })
+
   it('maps backend multilingual fields without losing the stable product route', async () => {
     const module = await import('../lib/products-db').catch(() => undefined)
     expect(module, 'lib/products-db.ts must exist').toBeDefined()
