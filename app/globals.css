@@ -165,6 +165,20 @@
   }
 }
 
+@keyframes certificate-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.cert-marquee-track {
+  animation: certificate-marquee 54s linear infinite;
+}
+
+.cert-marquee:hover .cert-marquee-track,
+.cert-marquee:focus-within .cert-marquee-track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -183,5 +197,14 @@
   }
   [data-reveal='hidden'] .flow-rail {
     transform: none;
+  }
+  .cert-marquee {
+    overflow-x: auto;
+  }
+  .cert-marquee-track {
+    animation: none;
+  }
+  .cert-marquee-copy {
+    display: none;
   }
 }
