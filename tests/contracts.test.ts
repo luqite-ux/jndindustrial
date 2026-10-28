@@ -3,6 +3,8 @@ import { getProductView, getProductViews } from '../lib/products'
 import { absoluteUrl, productJsonLd } from '../lib/seo'
 import { existsSync, readFileSync } from 'node:fs'
 import { statSync } from 'node:fs'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 
 const expectedSlugs = [
   'top-entry-agitator',
@@ -20,6 +22,15 @@ const expectedSlugs = [
 ]
 
 describe('customer catalog contract', () => {
+  it('renders larger product artwork on a continuous white card surface', async () => {
+    const { ProductCard } = await import('../components/product-card')
+    const html = renderToStaticMarkup(createElement(ProductCard, { product: getProductViews()[0] }))
+    expect(html).toContain('aspect-[4/3] overflow-hidden bg-white')
+    expect(html).toContain('object-contain p-2')
+    expect(html).toContain('sm:p-3')
+    expect(html).not.toContain('bg-[#f7f9fb]')
+  })
+
   it('keeps carousel copy inside responsive safe areas and gives every selector a 44px target', () => {
     const source = readFileSync(new URL('../components/home/hero-carousel.tsx', import.meta.url), 'utf8')
     expect(source).toContain('md:max-w-[min(32rem,42vw)]')
