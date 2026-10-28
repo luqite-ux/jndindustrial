@@ -21,6 +21,15 @@ const expectedSlugs = [
   'process-tower',
 ]
 
+describe('page rhythm contract', () => {
+  it('gives every section-pad block responsive vertical breathing room', () => {
+    const css = readFileSync(new URL('../app/globals.css', import.meta.url), 'utf8')
+    expect(css).toMatch(/\.section-pad\s*\{[^}]*padding-block:\s*5rem;/s)
+    expect(css).toMatch(/@media\s*\(min-width:\s*640px\)[\s\S]*?\.section-pad\s*\{[^}]*padding-block:\s*6rem;/)
+    expect(css).toMatch(/@media\s*\(min-width:\s*1024px\)[\s\S]*?\.section-pad\s*\{[^}]*padding-block:\s*7rem;/)
+  })
+})
+
 describe('customer catalog contract', () => {
   it('renders larger product artwork on a continuous white card surface', async () => {
     const { ProductCard } = await import('../components/product-card')

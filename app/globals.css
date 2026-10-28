@@ -93,6 +93,9 @@
 }
 
 @layer utilities {
+  .section-pad {
+    padding-block: 5rem;
+  }
   .grid-lines {
     background-image:
       linear-gradient(to right, rgb(18 58 154 / 0.07) 1px, transparent 1px),
@@ -107,6 +110,18 @@
   }
   .eyebrow {
     @apply text-xs font-semibold uppercase tracking-[0.18em];
+  }
+}
+
+@media (min-width: 640px) {
+  .section-pad {
+    padding-block: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-pad {
+    padding-block: 7rem;
   }
 }
 
