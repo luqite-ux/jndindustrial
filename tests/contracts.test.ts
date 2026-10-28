@@ -123,6 +123,43 @@ describe('customer catalog contract', () => {
     for (const slug of expectedSlugs) expect(getProductView(slug)?.slug).toBe(slug)
   })
 
+  it('keeps the supplied side-entry and bottom-entry performance points in their product details', () => {
+    expect(getProductView('top-entry-agitator')?.configuration).toEqual(expect.arrayContaining([
+      'Motor and gearbox drive with a documented 0.55–200 kW power range and variable-frequency speed control',
+      'Mechanical, packing or magnetic sealing selected for the process conditions',
+    ]))
+    expect(getProductView('side-entry-agitator')?.configuration).toEqual(expect.arrayContaining([
+      'High-efficiency propeller provides high discharge flow with lower power demand',
+      'Main-shaft seal can be serviced without draining the tank',
+    ]))
+    expect(getProductView('bottom-entry-agitator')?.configuration).toEqual(expect.arrayContaining([
+      'Purpose-designed bottom-entry shaft seal supports stable sealing performance',
+      'Gear transmission supports smooth operation and efficient power transfer',
+    ]))
+  })
+
+  it('keeps source-specific description facts for every supplied product', () => {
+    const requiredFacts: Record<string, string[]> = {
+      'top-entry-agitator': ['0.55–200 kW', 'magnetic sealing', 'mass transfer and heat transfer'],
+      'side-entry-agitator': ['without draining the tank', 'High-efficiency propeller', 'Wastewater, sludge-water'],
+      'bottom-entry-agitator': ['bottom-entry shaft seal', 'Gear transmission', 'High-viscosity fluid processing'],
+      'horizontal-ribbon-mixer': ['Double-ribbon layout', 'limited temperature rise'],
+      'ploughshare-mixer': ['high-speed cutters', 'Computer-controlled processing'],
+      'drum-mixer': ['residual material below 1%', 'hot-air nozzles'],
+      reactor: ['leak detection', 'PTFE'],
+      'blending-tank': ['cleanability', 'pressure control'],
+      'storage-tank': ['floating-roof', 'liquid, gas or powdered'],
+      silo: ['weighing', 'moisture protection'],
+      'shell-and-tube-heat-exchanger': ['eddy-current testing', 'square layout'],
+      'process-tower': ['bubble-cap', 'vacuum column'],
+    }
+    for (const [slug, facts] of Object.entries(requiredFacts)) {
+      const product = getProductView(slug)
+      const rendered = JSON.stringify(product)
+      for (const fact of facts) expect(rendered, `${slug}: ${fact}`).toContain(fact)
+    }
+  })
+
   it('maps backend multilingual fields without losing the stable product route', async () => {
     const module = await import('../lib/products-db').catch(() => undefined)
     expect(module, 'lib/products-db.ts must exist').toBeDefined()
