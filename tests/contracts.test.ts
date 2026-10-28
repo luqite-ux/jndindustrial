@@ -122,6 +122,18 @@ describe('customer catalog contract', () => {
     }, 'en')).toMatchObject({ slug: 'reactor', name: 'Reactor', summary: 'English summary', whatItDoes: 'English overview', image: 'https://assets.example/reactor.jpg', selectionInputs: ['Volume'] })
   })
 
+  it('keeps customer specification tables available through static and backend product data', async () => {
+    const ribbon = getProductView('horizontal-ribbon-mixer')
+    expect(ribbon?.specifications?.columns).toEqual(['Model', 'Total volume (L)', 'Working volume (L)', 'Power (kW)', 'Speed (rpm)', 'L × W × H (mm)', 'Equipment mass (kg)'])
+    expect(ribbon?.specifications?.rows[0]).toEqual(['MPS-100', '100', '30–60', '3', '30–100', '1500 × 500 × 700', '350'])
+
+    const { mapProductRow } = await import('../lib/products-db')
+    expect(mapProductRow({
+      slug: 'horizontal-ribbon-mixer',
+      specs: { columns: ['Model', 'Power'], rows: [['MPS-100', '3 kW']] },
+    }).specifications).toEqual({ columns: ['Model', 'Power'], rows: [['MPS-100', '3 kW']] })
+  })
+
   it('maps every product to a customer-supplied public image', () => {
     for (const product of getProductViews()) {
       expect(product.image, product.slug).toMatch(/^\/materials\/products\/.+\.jpg$/)

@@ -19,6 +19,7 @@ export interface ProductCopy {
   configuration: string[]
   selectionInputs: string[]
   imageAlt?: string
+  specifications?: { columns: string[]; rows: string[][] }
 }
 
 export interface Product {
@@ -204,6 +205,8 @@ export const products: Product[] = [
           'Contact material and surface finish for the product',
         ],
         selectionInputs: ['Bulk density and particle characteristics', 'Target batch size and charging method'],
+        specifications: { columns: ['Model','Total volume (L)','Working volume (L)','Power (kW)','Speed (rpm)','L × W × H (mm)','Equipment mass (kg)'], rows: [
+          ['MPS-100','100','30–60','3','30–100','1500 × 500 × 700','350'], ['MPS-200','200','60–120','4','24–80','2000 × 600 × 900','450'], ['MPS-300','300','90–180','5.5','20–60','2200 × 700 × 1100','600'], ['MPS-500','500','150–300','7.5','15–50','2500 × 800 × 1200','1000'], ['MPS-1000','1000','300–600','11','12–40','2600 × 1100 × 1600','1800'], ['MPS-1500','1500','450–900','15','12–37','2800 × 1200 × 1800','2200'], ['MPS-2000','2000','600–1200','15','12–34','3300 × 1350 × 2000','3200'], ['MPS-3000','3000','900–1800','18.5','10–32','3500 × 1500 × 2200','4000'], ['MPS-5000','5000','1500–3000','30','8–28','4400 × 1800 × 2800','7600'], ['MPS-10000','10000','3000–6000','55','7–22','5500 × 2300 × 2600','13000'], ['MPS-20000','20000','6000–12000','90','6–18','6500 × 2650 × 3000','20000'], ['MPS-60000','60000','18000–36000','200','3–8','10000 × 4000 × 4500','42000'] ] },
         imageAlt:
           'Horizontal ribbon mixer with a flanged-inlet top plate, a trough body on mounting feet and a drive motor at one end',
       },
@@ -238,6 +241,8 @@ export const products: Product[] = [
           'Contact material and surface finish for the product',
         ],
         selectionInputs: ['Material moisture and any liquid addition', 'Target batch size and cycle time'],
+        specifications: { columns: ['Model','Total volume (L)','Working volume (L)','Power (kW)','Speed (rpm)','High-speed cutter (kW)','Cutters','L × W × H (mm)','Equipment mass (kg)'], rows: [
+          ['MPC-100','100','30–60','3','50–150','1.5','1','1500 × 850 × 1200','350'], ['MPC-200','200','60–120','4','35–100','2.2','1','1800 × 850 × 1300','450'], ['MPC-300','300','90–180','5.5','30–85','2.2','2','2000 × 950 × 1400','600'], ['MPC-500','500','150–300','7.5','25–65','3','2','2100 × 1200 × 1300','1000'], ['MPC-1000','1000','300–600','11','20–60','3','2','2400 × 1250 × 1500','1800'], ['MPC-1500','1500','450–900','15','18–55','4','3','3000 × 1500 × 1600','2200'], ['MPC-3000','3000','900–1800','22','15–48','5.5','3','3800 × 2200 × 1800','4000'], ['MPC-5000','5000','1500–3000','37','14–42','7.5','4','4800 × 2500 × 2800','7600'], ['MPC-10000','10000','3000–6000','75','11–33','11','6','5500 × 2300 × 2600','13000'], ['MPC-30000','30000','9000–18000','132','8–24','15','10','7400 × 2800 × 3200','22000'] ] },
       },
     },
   },
@@ -270,6 +275,8 @@ export const products: Product[] = [
           'Contact material and surface finish for the product',
         ],
         selectionInputs: ['Material flow behaviour and sensitivity to shear', 'Target batch size'],
+        specifications: { columns: ['Model','Total volume (L)','Working volume (L)','Power (kW)','Speed (rpm)','L × W × H (mm)','Equipment mass (kg)'], rows: [
+          ['MPS-750','750','375–450','3','4–12','2750 × 1600 × 1550','2300'], ['MPS-1000','1000','500–600','5.5','4–10','2950 × 1800 × 2100','3200'], ['MPS-5000','5000','2500–3000','11','4–9','4100 × 2800 × 2550','5100'], ['MPS-10000','10000','5000–6000','30','4–9','4560 × 3250 × 3350','9300'], ['MPS-20000','20000','10000–12000','45','3–8','5700 × 4100 × 3700','17000'], ['MPS-30000','30000','15000–18000','75','3–8','6200 × 4500 × 4150','21000'], ['MPS-40000','40000','20000–24000','90','3–7','6800 × 4900 × 4200','24000'] ] },
       },
     },
   },
