@@ -31,6 +31,16 @@ describe('page rhythm contract', () => {
 })
 
 describe('customer catalog contract', () => {
+  it('shows all three verified management-system certificates with their standards and validity', async () => {
+    const { CertificationGallery } = await import('../components/site/certification-gallery')
+    const html = renderToStaticMarkup(createElement(CertificationGallery))
+    expect(html).toContain('ISO 9001:2015')
+    expect(html).toContain('ISO 14001:2015')
+    expect(html).toContain('ISO 45001:2018')
+    expect(html).toContain('Valid until 15 December 2028')
+    expect(html.match(/\/images\/certificates\//g)).toHaveLength(3)
+  })
+
   it('renders larger product artwork on a continuous white card surface', async () => {
     const { ProductCard } = await import('../components/product-card')
     const html = renderToStaticMarkup(createElement(ProductCard, { product: getProductViews()[0] }))

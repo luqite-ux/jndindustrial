@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, CheckCircle2, Factory, FlaskConical, Gauge, Settings2, ShieldCheck } from 'lucide-react'
 import { HeroCarousel } from '@/components/home/hero-carousel'
 import { ProductCard } from '@/components/product-card'
+import { CertificationGallery } from '@/components/site/certification-gallery'
 import { RfqBand } from '@/components/site/rfq-band'
 import { Reveal } from '@/components/site/reveal'
 import { SectionHeading } from '@/components/site/section-heading'
@@ -66,6 +67,7 @@ export default async function HomePage() {
       <Reveal className="relative min-h-[420px] overflow-hidden rounded-sm bg-steel"><Image src="/images/facility/office.png" alt="JND laboratory and engineering workspace" fill className="object-cover" sizes="(min-width:1024px) 50vw, 100vw" /></Reveal>
       <div><SectionHeading eyebrow="Quality evidence" title="Documentation and inspection planned around the order." description="Technical data sheets, inspection reports, factory inspection and third-party inspection can be discussed and arranged according to the project." /><ul className="mt-8 space-y-4">{['Process requirements reviewed before configuration','Production progress feedback available','Factory inspection documentation discussed per order','Third-party inspection supported when required'].map((item,index)=><Reveal as="li" key={item} delay={index*50} className="flex items-start gap-3"><CheckCircle2 className="mt-0.5 size-5 shrink-0 text-navy-soft"/><span className="text-muted-foreground">{item}</span></Reveal>)}</ul></div>
     </div></section>
+    <section className="section-pad bg-steel"><div className="mx-auto max-w-7xl px-5 sm:px-8"><SectionHeading eyebrow="Certified systems" title="Management systems certified for mixing-equipment design and production." description="JND supplied current English certificates for its quality, environmental, and occupational health and safety management systems. Select a certificate to view it at full size." /><div className="mt-10"><CertificationGallery /></div></div></section>
     <RfqBand />
   </>
 }
