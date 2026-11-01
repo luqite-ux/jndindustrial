@@ -30,6 +30,18 @@ describe('page rhythm contract', () => {
   })
 })
 
+describe('homepage hero contract', () => {
+  it('gives all three carousel slides distinct buyer-facing headlines', async () => {
+    const module = await import('../components/home/hero-carousel').catch(() => undefined)
+    expect(module?.heroSlides).toBeDefined()
+
+    const titles = module?.heroSlides.map((slide) => slide.title) ?? []
+    expect(titles).toHaveLength(3)
+    expect(titles.every((title) => title.trim().length > 0)).toBe(true)
+    expect(new Set(titles).size).toBe(3)
+  })
+})
+
 describe('customer catalog contract', () => {
   it('shows all six bilingual management-system certificates with their standards and validity', async () => {
     const { CertificationGallery } = await import('../components/site/certification-gallery')

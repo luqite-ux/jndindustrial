@@ -10,6 +10,7 @@ interface Slide {
   image: string
   alt: string
   kicker: string
+  title: string
   body: string
   textSide: 'left' | 'right'
   desktopTone: 'light' | 'dark'
@@ -18,11 +19,12 @@ interface Slide {
   zoomOrigin: string
 }
 
-const slides: Slide[] = [
+export const heroSlides: Slide[] = [
   {
     image: '/images/hero/banner-1.webp',
     alt: 'Illustrated process plant with stainless steel reactors, agitator drives, motors and a technical control display on a pale blue stage',
     kicker: 'Industrial mixing and process equipment',
+    title: 'Mixing and process equipment, engineered around your material.',
     body: 'Agitators, mixers, reactors, tanks and heat exchangers, specified from your material, batch volume and operating conditions.',
     textSide: 'left',
     desktopTone: 'light',
@@ -34,6 +36,7 @@ const slides: Slide[] = [
     image: '/images/hero/banner-2.webp',
     alt: 'Industrial factory complex with a process tower, horizontal vessel and silos beside a glowing curved road on a deep blue background',
     kicker: 'Built in Changzhou, Jiangsu',
+    title: 'Custom vessels and process equipment, built to your drawings.',
     body: 'Non-standard vessels, silos and process equipment fabricated against your drawings, with production progress feedback.',
     textSide: 'right',
     desktopTone: 'dark',
@@ -45,6 +48,7 @@ const slides: Slide[] = [
     image: '/images/hero/banner-3.webp',
     alt: 'Wireframe engineering view of reactors and mixer drums inside a factory hall, circled by glowing flow lines',
     kicker: 'Non-standard customization and OEM/ODM',
+    title: 'Engineered-to-order systems, configured for your process.',
     body: 'Send drawings or a process description and engineers will propose a configuration. MOQ is 1 unit.',
     textSide: 'right',
     desktopTone: 'dark',
@@ -74,14 +78,14 @@ export function HeroCarousel() {
   }, [])
 
   const go = useCallback((index: number) => {
-    setActive((index + slides.length) % slides.length)
+    setActive((index + heroSlides.length) % heroSlides.length)
   }, [])
 
   const autoplaying = !reducedMotion && !userPaused && !hovering && !focusWithin
 
   useEffect(() => {
     if (!autoplaying) return
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % slides.length), AUTOPLAY_MS)
+    const timer = window.setInterval(() => setActive((current) => (current + 1) % heroSlides.length), AUTOPLAY_MS)
     return () => window.clearInterval(timer)
   }, [autoplaying, active])
 
@@ -90,7 +94,7 @@ export function HeroCarousel() {
     if (event.key === 'ArrowRight') go(active + 1)
   }
 
-  const current = slides[active]
+  const current = heroSlides[active]
 
   return (
     <section
@@ -116,14 +120,14 @@ export function HeroCarousel() {
       }}
     >
       <div aria-live={autoplaying ? 'off' : 'polite'}>
-        {slides.map((slide, index) => {
+        {heroSlides.map((slide, index) => {
           const isActive = index === active
           return (
             <div
               key={slide.image}
               role="group"
               aria-roledescription="slide"
-              aria-label={`${index + 1} of ${slides.length}`}
+              aria-label={`${index + 1} of ${heroSlides.length}`}
               aria-hidden={!isActive}
               className={cn(
                 'absolute inset-0 transition-opacity duration-500 ease-out motion-reduce:transition-none',
@@ -202,7 +206,7 @@ export function HeroCarousel() {
                 current.desktopTone === 'light' && 'md:text-navy',
               )}
             >
-              Mixing and process equipment, engineered around your material.
+              {current.title}
             </h1>
             <p
               className={cn(
@@ -259,7 +263,7 @@ export function HeroCarousel() {
             </button>
           )}
           <div className="ml-2 flex items-center gap-1" role="group" aria-label="Choose slide">
-            {slides.map((slide, index) => (
+            {heroSlides.map((slide, index) => (
               <button
                 key={slide.image}
                 type="button"
